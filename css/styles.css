@@ -1,0 +1,188 @@
+@import url("navbar.css");
+@import url("styleslibrary.css");
+
+/* === Estilo general del cuerpo del documento === */
+body {
+  font-family: Arial, sans-serif;          /* Fuente principal */
+  line-height: 1.6;                        /* Altura de línea para legibilidad */
+  margin: 0;                               /* Elimina margen por defecto */
+  padding: 0;                              /* Elimina padding por defecto */
+  background-color: #0d0d0d;               /* Fondo oscuro inspirado en tu imagen */
+  color: #f0f0f0;                          /* Texto claro para contraste */
+  padding-top: 100px;                      /* Espacio reservado para navbar fija */
+}
+
+/* === Encabezado general (nombre) === */
+.header {
+  background: #007acc;                     /* Fondo azul vibrante */
+  color: white;                            /* Texto blanco */
+  padding: 2rem;                           /* Espaciado interno amplio */
+  text-align: center;                      /* Centra contenido */
+}
+
+/* === Alternativa de encabezado (más oscuro), usada si .header es un <div> === */
+div.header {
+  background-color: #313131;               /* Fondo gris oscuro */
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* === Estilo común para todas las secciones principales (excepto navbar/header) === */
+.section {
+  padding: 2rem;                           /* Relleno interno */
+  max-width: 800px;                        /* Ancho máximo para legibilidad */
+  margin: auto;                            /* Centrado horizontal */
+  scroll-margin-top: 120px; /* Evita que los títulos se oculten al hacer clic en enlaces */
+}
+
+/* === Título de secciones primarias === */
+h1 {
+  color: #007acc;                          /* Azul vibrante para destacar */
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* === Título de secciones secundarias === */
+h2 {
+  color: #007acc;                          /* Azul vibrante para destacar */
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* === Botones tipo enlace === */
+a.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: #007acc;
+  color: white;
+  border-radius: 5px;                      /* Bordes redondeados */
+}
+
+/* === Pie de página === */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #eee;
+  margin-top: 2rem;
+}
+
+/* === Bloque de descripcion === */
+#id-descripcion {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+}
+
+.descripcion-profile {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 1rem;
+}
+
+.descripcion-texto {
+  text-align: center;
+  color: #f0f0f0;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+/* === Bloque de Discord === */
+#id-discord {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+  text-align: center;
+}
+
+#id-discord a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+#id-discord img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 24px;
+  display: block;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); */
+}
+
+
+/* === Bloque de redes sociales en grilla === */
+#id-redes {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+  text-align: center;
+}
+
+.redes-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.redes-list li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.redes-list a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.redes-list img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+}
+
+.redes-list span {
+  display: block;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  color: #f0f0f0;
+  word-break: break-word;
+}
+
+@media (max-width: 900px) {
+  .redes-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .redes-list {
+    grid-template-columns: 1fr;
+  }
+}
+
