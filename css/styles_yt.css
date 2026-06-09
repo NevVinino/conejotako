@@ -1,0 +1,232 @@
+/* === Estilos de YouTube: en vivo y videos recomendados === */
+
+:root {
+  /* Tamaños y comportamiento de títulos: modifica estos valores para
+     afectar todos los títulos de las tarjetas de video */
+  --yt-title-size: 1rem; /* Tamaño base del título */
+  --yt-title-weight: 700; /* Peso de fuente para mejor legibilidad */
+  --yt-title-lines: 2; /* Líneas máximas visibles antes de truncar */
+}
+
+/* === Bloque de descripcion de YouTube === */
+
+/* --- Contenedor del reproductor / wrapper del bloque "En vivo" --- */
+#id-descripcion .video-wrapper {
+  /* El wrapper centraliza el iframe y limita su ancho */
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* === Bloque de descripcion: video en vivo === */
+
+/* --- Estilos del iframe (reproductor en vivo) --- */
+#id-descripcion .video-wrapper iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9; /* Mantiene proporción de video */
+  height: auto;
+  border: 0;
+  border-radius: 12px;
+}
+
+/* === Bloque de descripcion: video offline === */
+
+/* --- Imagen que se muestra cuando no hay directo --- */
+#id-descripcion .img-offline {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto 10px;
+}
+
+/* === Bloque de descripcion: texto offline === */
+/* --- Texto que acompaña la imagen offline --- */
+#id-descripcion .texto-offline {
+  text-align: center;
+  color: #ffffff;
+  font-size: 0.95rem;
+  margin: 0 0 20px;
+}
+
+.oculto {
+  /* Clase utilitaria: oculta un elemento (se usa para alternar vista en vivo) */
+  display: none !important;
+}
+
+.mostrar {
+  /* Clase utilitaria: fuerza la visibilidad cuando sea necesario */
+  display: block !important;
+}
+
+/* === Bloque de videos recomendados === */
+#contenedor-videos {
+  /* Contenedor genérico de tarjetas (no el grid principal, pero
+     se mantiene como referencia por compatibilidad) */
+  width: 100%;
+  gap: 20px;
+}
+
+/* === Bloque de videos recomendados === */
+
+/* --- Grid principal de videos recomendados --- */
+#id-descripcion #contenedor-videos.grilla-videos {
+  width: 100%;
+  max-width: 1100px; /* Limita el ancho total de la grilla y centra */
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 columnas fijas */
+  gap: 28px; /* Espacio entre tarjetas */
+  padding: 20px 0 0;
+  align-items: start;
+}
+
+/* === Tarjetas de video === */
+
+/* --- Tarjeta individual de video --- */
+#id-descripcion .tarjeta-video {
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0; /* Evita overflow cuando el contenido es largo */
+}
+
+/* === Video dentro de la tarjeta === */
+
+/* --- Iframe que puede insertarse dentro de la tarjeta (si se usa) --- */
+#id-descripcion .tarjeta-video iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  display: block;
+  border-radius: 8px;
+}
+
+
+/* --- Estado de carga/placeholder --- */
+#id-descripcion .cargando {
+  color: #888;
+  font-style: italic;
+  text-align: center;
+  grid-column: 1 / -1;
+  margin: 0;
+}
+/* === Responsive === */
+@media (max-width: 640px) {
+  #id-descripcion #contenedor-videos.grilla-videos {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Tarjetas: duplicado global (compatibilidad) ---
+   Esta regla cubre variantes fuera del scope #id-descripcion en caso
+   de que se reutilicen las tarjetas en otras páginas. */
+.tarjeta-video {
+  display: block;
+  text-decoration: none;
+  background: #141414;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Efecto de hover */
+.tarjeta-video:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+}
+
+.tarjeta-video.formato-largo {
+  width: 100%;
+}
+
+.formato-largo .mini-reproductor-capa {
+  aspect-ratio: 16 / 9;
+}
+
+.tarjeta-video.formato-short {
+  width: 100%;
+}
+
+.formato-short .mini-reproductor-capa {
+  aspect-ratio: 9 / 16;
+}
+
+.mini-reproductor-capa {
+  position: relative;
+  width: 100%;
+  min-height: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.boton-play-personalizado {
+  width: 50px !important;
+  height: 50px !important;
+  min-width: 50px;
+  min-height: 50px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.3s ease;
+  backdrop-filter: blur(4px);
+  z-index: 2;
+}
+
+.tarjeta-video:hover .boton-play-personalizado {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.boton-play-personalizado svg {
+  width: 22px;
+  height: 22px;
+  margin-left: 3px;
+}
+
+/* --- Bloque principal/limpio del título (definición activa) --- */
+.titulo-video {
+  /* Padding algo mayor para evitar cortes visuales con la miniatura */
+  padding: 12px 14px 16px;
+  font-size: var(--yt-title-size);
+  font-weight: var(--yt-title-weight);
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.4; /* Interlineado seguro */
+  font-family: sans-serif;
+  /* Multiline clamp para mostrar varias líneas y truncar */
+  display: -webkit-box;
+  line-clamp: var(--yt-title-lines);
+  -webkit-line-clamp: var(--yt-title-lines);
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  /* Altura fija proporcional al número de líneas para evitar saltos */
+  height: calc(var(--yt-title-lines) * 1.4em);
+  box-sizing: content-box; /* Desliga el padding de la altura */
+}
+
+@media (max-width: 640px) {
+  :root {
+    --yt-title-lines: 1;
+    --yt-title-size: 0.95rem;
+  }
+}

@@ -21,23 +21,45 @@
         <img src="img/profile.jpg" alt="profile" class="descripcion-profile">
 
         <p class="descripcion-texto">
-            ¡Hola! Soy Conejotako, un apasionado creador de contenido que
-            se dedica a compartir momentos divertidos, emocionantes y
-            entretenidos sobre animes, mangas, novelas. Mi objetivo es
+            ¡Hola! Soy Conejotako, un  creador de contenido que
+            se dedica a compartir momentos entretenidos y
+            divertidos sobre animes, mangas, novelas. Mi objetivo es
             hacer reír a la gente y crear una comunidad positiva donde
             todos puedan disfrutar de mis videos y publicaciones.
-            ¡Únete a mi aventura y acompáñame en este viaje lleno de
-            diversión y risas!
         </p>
     </div>
 
+    <div class="descripcion" id="id-descripcion">
+        <h2 class="section-title">En vivo!!</h2>
+
+        <div id="imagen-offline" class="mostrar">
+            <img src="img/offline.gif" alt="Conejotako fuera de línea" class="img-offline">
+            <p class="texto-offline">¡Ahora no estamos en directo!
+                Pero puedes revisar los videos nuevos del canal.
+            </p>
+        </div>
+
+        <div class="video-wrapper oculto" id="reproductor-vivo">
+            <iframe id="iframe-youtube" src="https://www.youtube.com/embed/live_stream?channel=UCkaHtuBIU0JvmAxN5Qn6Ftw"
+                frameborder="0" allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+
+    <div class="descripcion" id="id-descripcion">
+        <h2 class="section-title">Videos Recomendados !!</h2>
+
+        <div id="contenedor-videos" class="grilla-videos">
+            <p class="cargando">Cargando videos recientes...</p>
+        </div>
+    </div>
 
     <div class="discord" id="id-discord">
         <h2>Únete al Discord!!</h2>
         <p class="descripcion-texto">
             Unete al discord para estar al tanto de mis
             novedades, compartir tus opiniones sobre mis
-            videos y conocer a otros fans de Conejotako.
+            videos y conocer a otros Gazapitos.
             ¡Te esperamos con los brazos abiertos en nuestra
             comunidad de Discord!
         </p>
@@ -108,9 +130,27 @@
         </ul>
     </div>
 
+    <div class="descripcion" id="id-descripcion">
+        <h2 class="section-title">Contacto</h2>
+
+        <p class="descripcion-texto">
+            Si deseas ponerte en contacto conmigo para consultas, colaboraciones o
+            cualquier otra razón, no dudes en enviarme un correo electrónico
+            a <a href="mailto:contactoconejotako@gmail.com">contactoconejotako@gmail.com</a>
+        </p>
+
+        <p class="descripcion-texto">
+            En caso de que gustes, puedes entrar al servidor de discord 
+            a <a href="https://discord.com/invite/ZvXUFtyyBX" target="_blank">"Los 
+            gazapitos"</a> para tener contacto directo por MD de Discord.
+        </p>
+
+    </div>
+
 </body>
 
 
 <script src="js/navbar.js"></script>
+<script type="module" src="js/config_yt.js"></script>
 
 </html>

@@ -1,5 +1,10 @@
 @import url("navbar.css");
-@import url("styleslibrary.css");
+@import url("styles_library.css");
+@import url("styles_yt.css");
+@import url("styles_traducciones.css");
+* {
+  box-sizing: border-box;
+}
 
 /* === Estilo general del cuerpo del documento === */
 body {
@@ -60,6 +65,20 @@ a.btn {
   border-radius: 5px;                      /* Bordes redondeados */
 }
 
+/* Estilo específico para el enlace de Discord */
+.descripcion-texto a {
+    color: #ffffff;             /* Color blanco */
+    font-style: italic;         /* Letra cursiva */
+    text-shadow: 0px 0px 1px rgba(255, 255, 255, 0.5); /* Un sutil truco para que resalte más */    
+    transition: color 0.3s ease, opacity 0.3s ease; /* Transición suave para cuando pasen el mouse */
+}
+
+/* Efecto opcional y recomendado cuando el usuario pasa el mouse por encima (Hover) */
+.descripcion-texto a:hover {
+    opacity: 0.8;               /* Se vuelve sutilmente translúcido al pasar el cursor */
+    color: #5865F2;             /* OPCIONAL: Cambia al color oficial de Discord si pasan el mouse */
+}
+
 /* === Pie de página === */
 footer {
   text-align: center;
@@ -70,7 +89,7 @@ footer {
 
 /* === Bloque de descripcion === */
 #id-descripcion {
-  max-width: 800px;
+  max-width: 1200px; /* Aumentado para permitir grillas de 3 columnas más anchas */
   margin: 0 auto;
   padding: 2rem 1rem 3rem;
 }
@@ -116,7 +135,6 @@ footer {
   border: 1px solid rgba(255, 255, 255, 0.08);
   /* box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); */
 }
-
 
 /* === Bloque de redes sociales en grilla === */
 #id-redes {
@@ -185,4 +203,5 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
 

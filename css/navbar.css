@@ -27,6 +27,12 @@
 	text-decoration: none;
 	font-weight: bold;
 	font-size: 20px;
+	transition: color 0.25s ease;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+	color: #ffffff;
 }
 
 /* === NAVBAR FIJA superior === */

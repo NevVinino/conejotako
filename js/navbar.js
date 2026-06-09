@@ -15,7 +15,8 @@ function buildNavbarTemplate(basePath) {
             <nav class="nav-links">
                 <a href="${basePath}index.html">Inicio</a>
                 <a href="${basePath}paginas/anime.html">Anime</a>
-                <a href="${basePath}paginas/novelas.html">Novelas</a>
+                <a href="${basePath}paginas/mangas.html">Mangas</a>
+                <a href="${basePath}paginas/traducciones.html">Traducciones Beta</a>
                 <a href="${basePath}paginas/contacto.html">Contacto</a>
             </nav>
         </div>
