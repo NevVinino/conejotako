@@ -50,6 +50,7 @@
 	justify-content: space-between;
 	align-items: center;
 	padding: 0 1rem;
+	position: relative;
 }
 
 /* === Contenedor de los enlaces del menú === */
@@ -74,16 +75,26 @@
 		display: block;
 	}
 
+	.nav-logo a {
+		font-size: 20px;
+	}
+
+	.nav-logo-gif {
+		width: 48px;
+		height: 48px;
+	}
+
 	.nav-links {
 		display: none;
 		flex-direction: column;
 		background-color: #121212;
 		position: absolute;
-		top: 70px;
+		top: 100px;
 		left: 0;
 		width: 100%;
 		text-align: center;
 		padding: 1rem 0;
+		z-index: 998;
 	}
 
 	.nav-links.show {
