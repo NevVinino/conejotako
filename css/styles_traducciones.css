@@ -1,4 +1,3 @@
-/* === Bloque de traducciones beta === */
 body.traducciones-page #id-descripcion {
   max-width: 1100px;
   margin: 0 auto;
@@ -15,6 +14,36 @@ body.traducciones-page #id-descripcion img {
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
 }
 
+/* Contenedor y Estilos del Buscador */
+body.traducciones-page .buscador-contenedor {
+  max-width: 500px;
+  margin: 0 auto 2.5rem; /* Centrado con margen inferior */
+  padding: 0 0.5rem;
+}
+
+body.traducciones-page #buscador {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  font-size: 1rem;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  outline: none;
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.traducciones-page #buscador::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+body.traducciones-page #buscador:focus {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: #5865F2; /* Color de enfoque haciendo juego con el hover */
+  box-shadow: 0 0 12px rgba(88, 101, 242, 0.2);
+}
+
+/* Modificación de la lista para el Grid */
 body.traducciones-page #id-descripcion ul {
   list-style: none;
   padding: 0;
@@ -28,11 +57,13 @@ body.traducciones-page #id-descripcion li {
   margin: 0;
 }
 
+/* Modificado para soportar Título + Fecha en columna */
 body.traducciones-page #id-descripcion li a {
   display: flex;
+  flex-direction: column; /* Alinea los elementos hacia abajo */
   align-items: center;
   justify-content: center;
-  min-height: 64px;
+  min-height: 76px; /* Aumentado un poco para que quepa la fecha cómodamente */
   padding: 0.9rem 1rem;
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.04);
@@ -50,6 +81,30 @@ body.traducciones-page #id-descripcion li a:hover {
   color: #5865F2;
   transform: translateY(-2px);
   background: rgba(255, 255, 255, 0.08);
+}
+
+/* Estilos para los textos internos del botón */
+body.traducciones-page .titulo-traduccion {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+body.traducciones-page .fecha-traduccion {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.45); /* Color grisáceo sutil */
+  transition: color 0.3s ease;
+}
+
+/* Cambia el color de la fecha sutilmente al hacer hover en la tarjeta */
+body.traducciones-page #id-descripcion li a:hover .fecha-traduccion {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.fecha-destacada {
+    color: #007acc; /* Azul */
+    font-weight: bold;
 }
 
 @media (max-width: 640px) {
