@@ -14,8 +14,8 @@ const YT_CHANNEL_ID = "UCkaHtuBIU0JvmAxN5Qn6Ftw";
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// URLs de la API de YouTube
-const youtubeUrl = `https://www.googleapis.com/youtube/v3/search?key=${YT_API_KEY}&channelId=${YT_CHANNEL_ID}&part=snippet,id&order=date&maxResults=3&type=video`;
+// URLs de la API de YouTube: va pedir 6 videos recientes (para luego filtrar y quedarnos con 3) y una consulta específica para el directo
+const youtubeUrl = `https://www.googleapis.com/youtube/v3/search?key=${YT_API_KEY}&channelId=${YT_CHANNEL_ID}&part=snippet,id&order=date&maxResults=6&type=video`;
 const youtubeLiveUrl = `https://www.googleapis.com/youtube/v3/search?key=${YT_API_KEY}&channelId=${YT_CHANNEL_ID}&part=snippet,id&eventType=live&type=video&maxResults=1`;
 
 const LIVE_EMBED_URL = `https://www.youtube.com/embed/live_stream?channel=${YT_CHANNEL_ID}&autoplay=1&mute=1&playsinline=1&rel=0`;
@@ -25,7 +25,7 @@ const HORA_INICIO = 6;  // 6:00 AM
 const HORA_FIN = 23;   // 11:00 PM
 
 // ==========================================
-// 3. LÓGICA DE LOS 3 VIDEOS RECOMENDADOS (Escudo Supabase)
+// 3. LÓGICA DE LOS 3 VIDEOS RECOMENDADOS (Filtro Anti-Directos Pasados)
 // ==========================================
 async function gestionarVideosRecomendados() {
     try {
@@ -43,21 +43,55 @@ async function gestionarVideosRecomendados() {
         const estaEnHorarioPermitido = (horaActual >= HORA_INICIO && horaActual < HORA_FIN);
 
         if (pasoMasDeUnaHora && estaEnHorarioPermitido) {
-            console.log("Videos: Sincronizando con YouTube...");
+            console.log("Videos: Sincronizando lote con YouTube...");
             const response = await fetch(youtubeUrl);
             const ytData = await response.json();
 
-            if (ytData.items && ytData.items.length > 0) {
-                await supabase.from('videos_cache').delete().neq('id', 0);
+            if (ytData && ytData.items && ytData.items.length > 0) {
+                // Extraemos los IDs de los 10 videos
+                const idsValidos = ytData.items
+                    .map(item => item.id ? item.id.videoId : null)
+                    .filter(id => id !== null);
 
-                const filasAInsertar = ytData.items.map(item => ({
-                    youtube_id: item.id.videoId,
-                    titulo: item.snippet.title,
-                    ultima_revision: ahora.toISOString()
-                }));
+                if (idsValidos.length === 0) {
+                    renderizarVideos(cache);
+                    return;
+                }
 
-                await supabase.from('videos_cache').insert(filasAInsertar);
-                renderizarVideos(filasAInsertar);
+                const listaIds = idsValidos.join(',');
+
+                // Consultamos a la API los detalles moleculares para ver si fueron transmisiones en vivo
+                const urlDetalles = `https://www.googleapis.com/youtube/v3/videos?key=${YT_API_KEY}&id=${listaIds}&part=snippet,liveStreamingDetails`;
+                const resDetalles = await fetch(urlDetalles);
+                const dataDetalles = await resDetalles.json();
+
+                if (dataDetalles && dataDetalles.items && dataDetalles.items.length > 0) {
+                    // FILTRADO: Si el video NO contiene 'liveStreamingDetails', es un video subido o short editado tradicional
+                    const soloEditadosYShorts = dataDetalles.items.filter(item => {
+                        return !item.liveStreamingDetails;
+                    });
+
+                    // Cortamos estrictamente para quedarnos con los 3 más nuevos de la lista limpia
+                    const tresFinales = soloEditadosYShorts.slice(0, 3);
+
+                    if (tresFinales.length > 0) {
+                        await supabase.from('videos_cache').delete().neq('id', 0);
+
+                        // Mapeamos los datos simulando exactamente la estructura de tu primera versión
+                        const filasAInsertar = tresFinales.map(item => ({
+                            youtube_id: item.id, // ID del video limpio
+                            titulo: item.snippet && item.snippet.title ? item.snippet.title : "Video sin título",
+                            ultima_revision: ahora.toISOString()
+                        }));
+
+                        await supabase.from('videos_cache').insert(filasAInsertar);
+                        renderizarVideos(filasAInsertar);
+                    } else {
+                        renderizarVideos(cache);
+                    }
+                } else {
+                    renderizarVideos(cache);
+                }
             } else {
                 renderizarVideos(cache);
             }
@@ -83,6 +117,8 @@ function renderizarVideos(videos) {
     contenedor.innerHTML = ''; 
     videos.forEach(video => {
         const idVideo = video.youtube_id || video.video_id;
+        if (!idVideo) return;
+
         const tituloLower = video.titulo.toLowerCase();
         const esShort = tituloLower.includes('#shorts') || tituloLower.includes('short');
         const claseFormato = esShort ? 'formato-short' : 'formato-largo';
