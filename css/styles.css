@@ -192,6 +192,41 @@ footer {
   word-break: break-word;
 }
 
+/* EFECTOS DE MOVIMIENTO PARA LAS REDES SOCIALES */
+
+/* 1. Preparación de los enlaces de las redes */
+.redes-list li a {
+    display: flex;                /* Alinea el icono y el texto en fila */
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    
+    /* Prepara el terreno para que la animación al pasar el mouse sea fluida */
+    transition: transform 0.3s ease, filter 0.3s ease; 
+}
+
+/* 2. El salto al pasar el mouse (:hover) por la red social */
+.redes-list li a:hover {
+    transform: translateY(-5px);  /* Hace saltar la red social 5 píxeles hacia arriba */
+    filter: brightness(1.2);      /* Opcional: le da un ligero brillo extra al icono y texto */
+}
+
+
+/* EFECTO DE MOVIMIENTO PARA EL BANNER DE DISCORD */
+.discord a {
+    display: inline-block;        /* Permite que el enlace responda al movimiento vertical */
+    margin-top: 15px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* 2. El salto al pasar el mouse (:hover) sobre el botón de Discord */
+.discord a:hover {
+    transform: translateY(-6px);  /* Hace saltar el botón de Discord un poquito más por ser grande */
+    filter: drop-shadow(0 8px 15px rgba(114, 137, 218, 0.4)); /* Añade un sutil brillo con el color azul de Discord */
+}
+
+
+
 @media (max-width: 900px) {
   .redes-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
