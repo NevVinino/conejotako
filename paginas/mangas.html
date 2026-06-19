@@ -1,54 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conejotako</title>
-    <!-- referenciar Archivo css -->
+    <title>Conejotako - Mangas</title>
     <link rel="stylesheet" href="../css/styles.css">
-    <!-- Icono de la pestaña del navegador (favicon) -->
     <link rel="icon" type="image/jpg" href="../img/profile.jpg">
 </head>
-
 <body>
-
+    
     <div id="espacio-navbar"></div>
+    
     <h1>Mangas</h1>
 
-    <div class="biblioteca">
-        <div class="biblioteca-item">
-            <a href="https://mega.nz/folder/djYFmJaa#c9sfvZiD4sNgUgt1pMrbiA" target="_blank" rel="noopener noreferrer">
-                <img src="../img/novelas/rezero/arco1.jpg" alt="Re:Zero">
-                <span>"PRONTO" - Novela 1</span>
-            </a>
-        </div>
-
-        <div class="biblioteca-item">
-            <a href="https://mega.nz/folder/VqZwWIKB#xMO2sMDrgUQTqXofHR79Xw" target="_blank" rel="noopener noreferrer">
-                <img src="../img/novelas/rezero/arco2.jpg" alt="Novela 2">
-                <span>"PRONTO" - Novela 2</span>
-            </a>
-        </div>
-
-        <div class="biblioteca-item">
-            <a href="https://mega.nz/folder/QzQ1UDIa#tw0SK-PJf59lYWTDohXbYg" target="_blank" rel="noopener noreferrer">
-                <img src="../img/novelas/rezero/arco3.jpg" alt="Novela 3">
-                <span>"PRONTO" - Novela 3</span>
-            </a>
-        </div>
-
-        <div class="biblioteca-item">
-            <a href="https://mega.nz/folder/djYFmJaa#c9sfvZiD4sNgUgt1pMrbiA" target="_blank" rel="noopener noreferrer">
-                <img src="../img/novelas/rezero/arco4.jpg" alt="Novela 4">
-                <span>"PRONTO" - Novela 4</span>
-            </a>
-        </div>
+    <div id="contenedor-biblioteca" class="biblioteca">
+        <p id="estado-carga" style="color: white; padding: 20px; font-family: sans-serif;">Cargando catálogo de mangas...</p>
     </div>
 
+    <script src="../js/navbar.js"></script>
+    <script src="../js/supabase.js"></script>
+    
+    <script src="../js/biblioteca_manga.js"></script> 
 </body>
-
-
-<script src="../js/navbar.js"></script>
-
 </html>

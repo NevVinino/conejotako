@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conejotako - Escenario</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/styles_escenario.css">
+    <link rel="icon" type="image/jpg" href="../img/profile.jpg">
+    <!-- Supabase Local -->
+    <script src="../js/supabase.js"></script>
+</head>
+
+<body>
+
+    <div id="espacio-navbar"></div>
+
+    <main class="escenario-layout">
+        <!-- COLUMNA IZQUIERDA: EL REPRODUCTOR Y DETALLES -->
+        <section class="streaming-principal">
+            <div class="video-wrapper">
+                <iframe id="reproductor-iframe" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+
+            <div class="info-capitulo-bloque">
+                <h2 id="titulo-streaming-actual">Cargando...</h2>
+
+                <!-- Pestaña o bloque de descargas/opciones estilo "Desu" -->
+                <div class="tabs-zona">
+                    <button class="tab-btn activo">Descargas</button>
+                </div>
+                <div class="contenido-tab" id="contenedor-descargas">
+                    <!-- Enlaces de MEGA / OneDrive dinámicos -->
+                </div>
+            </div>
+        </section>
+
+        <!-- COLUMNA DERECHA: PLAYLIST DE EPISODIOS -->
+        <aside class="sidebar-episodios">
+            <!-- Selector de rangos superior (ej: Ep 1 - 16) -->
+            <div class="sidebar-header">
+                <span id="rango-texto" class="rango-badge">Episodios</span>
+            </div>
+
+            <!-- Lista con Scroll con las miniaturas de los caps -->
+            <div class="lista-scroll-vertical" id="playlist-contenedor">
+                <!-- Se llena dinámicamente -->
+            </div>
+
+            <!-- Controles inferiores del Sidebar -->
+            <div class="sidebar-controles">
+                <a id="btn-volver-lobby" href="#" class="btn-sidebar action-secondary">≡ Ver todos los episodios</a>
+
+                <div class="navegacion-caps-flex">
+                    <button id="btn-anterior" class="btn-sidebar action-primary">❮ Anterior</button>
+                    <button id="btn-siguiente" class="btn-sidebar action-primary">Siguiente ❯</button>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <script src="../js/navbar.js"></script>
+    <script src="../js/escenario.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,286 @@
+/* ========================================================
+   DISEÑO EN ZONA DE ESCENARIO (Dos Columnas con Flexbox)
+   ======================================================== */
+.escenario-layout {
+    max-width: 1400px;
+    margin: 20px auto;
+    padding: 0 20px;
+    display: flex;
+    gap: 20px;
+    font-family: sans-serif;
+    color: #ffffff;
+}
+
+/* ========================================================
+   COLUMNA IZQUIERDA: REPRODUCTOR PRINCIPAL
+   ======================================================== */
+.streaming-principal {
+    flex: 1; /* Ocupa todo el espacio disponible */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Molde perfecto de 16:9 para el Iframe */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #000000;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Textos abajo del video */
+.info-capitulo-bloque {
+    margin-top: 15px;
+}
+
+.titulo-streaming-actual {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin: 0 0 15px 0;
+}
+
+/* Pestañas y Enlaces de Descarga estilo la barra "Desu" */
+.tabs-zona {
+    display: flex;
+    border-bottom: 2px solid #240046;
+    margin-bottom: 12px;
+}
+
+.tab-btn {
+    background-color: #9d4edd; /* El color morado de tu conejito */
+    color: #ffffff;
+    border: none;
+    padding: 8px 24px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border-radius: 4px 4px 0 0;
+    cursor: default;
+}
+
+.contenido-tab {
+    display: flex;
+    gap: 10px;
+    padding: 5px 0;
+}
+
+/* Botones para abrir links externos de descarga */
+.btn-link-descarga {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.btn-link-descarga.mega {
+    background-color: #cc0000; /* Rojo estándar de MEGA */
+}
+.btn-link-descarga.mega:hover {
+    background-color: #e60000;
+}
+
+.btn-link-descarga.onedrive {
+    background-color: #0078d4; /* Azul estándar de OneDrive */
+}
+.btn-link-descarga.onedrive:hover {
+    background-color: #106ebe;
+}
+
+/* ========================================================
+   COLUMNA DERECHA: SIDEBAR DE EPISODIOS (Lista con Scroll)
+   ======================================================== */
+.sidebar-episodios {
+    width: 350px; /* Ancho fijo igual al de tu imagen de muestra */
+    background-color: #151822; /* Fondo gris oscuro de la sidebar */
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #240046;
+    height: fit-content;
+}
+
+/* Encabezado del Sidebar */
+.sidebar-header {
+    padding: 12px 15px;
+    background-color: #1c202e;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #2d3548;
+}
+
+.rango-badge {
+    background-color: #2a2f42;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #cbd5e0;
+}
+
+/* CONTENEDOR CON SCROLL PARA LA LISTA (Mágica pura) */
+.lista-scroll-vertical {
+    max-height: 440px; /* Ajusta la altura máxima para que coincida con el video */
+    overflow-y: auto;  /* Activa la barra de desplazamiento si se pasa del límite */
+}
+
+/* Estilización de la barra de scroll (Opcional, estilo moderno) */
+.lista-scroll-vertical::-webkit-scrollbar {
+    width: 6px;
+}
+.lista-scroll-vertical::-webkit-scrollbar-thumb {
+    background-color: #9d4edd;
+    border-radius: 3px;
+}
+
+/* Ítems individuales dentro de la lista de reproducción */
+.item-playlist {
+    display: flex;
+    gap: 12px;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #a0aec0;
+    border-bottom: 1px solid #1a1d29;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.item-playlist:hover {
+    background-color: #1c202e;
+    color: #ffffff;
+}
+
+/* Cuando es el capítulo actual en reproducción */
+.item-playlist.activo {
+    background-color: #240046; /* Tu morado en tono oscuro */
+    color: #e0aaff;            /* Texto morado claro de realce */
+    border-left: 4px solid #9d4edd; /* Línea indicadora morada */
+}
+
+/* Miniatura interna del ítem */
+.thumb-playlist {
+    width: 100px;
+    aspect-ratio: 16 / 9;
+    border-radius: 4px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.thumb-playlist img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info-playlist {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.num-ep {
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.item-playlist.activo .num-ep {
+    color: #c77dff; /* Cambia a morado brillante si está activo */
+}
+
+.tit-ep {
+    font-size: 0.8rem;
+    margin: 4px 0 0 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Pone "..." si el nombre es kilométrico */
+}
+
+/* Controles de navegación inferiores de la sidebar */
+.sidebar-controles {
+    padding: 15px;
+    background-color: #1c202e;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: 1px solid #2d3548;
+}
+
+.btn-sidebar {
+    width: 100%;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+/* Botón "Ver todos los episodios" */
+.action-secondary {
+    background-color: #2a2f42;
+    color: #ffffff;
+}
+.action-secondary:hover {
+    background-color: #38425d;
+}
+
+/* Botón "Siguiente" y "Anterior" con tu morado */
+.action-primary {
+    background-color: #9d4edd;
+    color: #ffffff;
+}
+.action-primary:hover {
+    background-color: #b5179e;
+}
+
+/* CORRECCIÓN: Contenedor con Flexbox para poner los dos botones alineados a los lados */
+.navegacion-caps-flex {
+    display: flex;
+    gap: 12px;       /* Espacio exacto entre ambos */
+    width: 100%;     /* Ocupa todo el ancho disponible del menú */
+    margin-top: 5px;
+}
+
+/* Ambos botones se dividen el espacio equitativamente (50/50) */
+.navegacion-caps-flex .btn-sidebar {
+    flex: 1;
+    width: auto;     /* Evita bloqueos de ancho fijo */
+}
+
+/* ========================================================
+   RESPONSIVE DESIGN (REGLAS PARA PANTALLAS CELULARES)
+   ======================================================== */
+@media (max-width: 992px) {
+    /* La pantalla pasa de horizontal a una sola columna vertical */
+    .escenario-layout {
+        flex-direction: column;
+    }
+
+    /* La sidebar pasa a medir el 100% en lugar de los 350px del PC */
+    .sidebar-episodios {
+        width: 100%;
+    }
+
+    .lista-scroll-vertical {
+        max-height: 300px; /* Reducimos la caja de scroll en móviles */
+    }
+}

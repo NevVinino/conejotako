@@ -1,0 +1,247 @@
+/* ========================================================
+   CONTENEDOR PRINCIPAL DEL LOBBY
+   ======================================================== */
+.lobby-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    font-family: sans-serif;
+    color: #ffffff;
+}
+
+/* ========================================================
+   SECCIÓN SUPERIOR: BANNER INFORMATIVO (Flexbox Responsivo)
+   ======================================================== */
+.anime-header {
+    background-color: #1a1e29; /* Gris oscuro del fondo superior */
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    gap: 30px;
+    margin-bottom: 25px;
+    border: 1px solid #2d3548;
+}
+
+/* Estado de carga de texto */
+.estado-lobby {
+    color: #a0aec0;
+    font-size: 1.1rem;
+    padding: 40px 0;
+    text-align: center;
+    width: 100%;
+    /* Centrar mensaje de Próximamente se subirán los capítulos de esta serie.*/
+    grid-column: 1 / -1; 
+}
+/* Bloque de la portada */
+.anime-portada-bloque {
+    flex: 0 0 200px; /* Tamaño fijo para la miniatura en PC */
+}
+
+.anime-portada-bloque img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    object-fit: cover;
+}
+
+/* Bloque de los textos */
+.anime-info-bloque {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; 
+}
+
+.anime-info-bloque h2 {
+    font-size: 2rem;
+    margin: 0 0 15px 0;
+    color: #ffffff;
+}
+
+.anime-info-bloque .sinopsis {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #cbd5e0; /* Color gris claro para lectura suave */
+    margin: 0 0 20px 0;
+}
+
+/* Botón Naranja de Capítulos */
+.btn-capitulos-scroll {
+background-color: #9d4edd; /* Morado claro/medio inspirado en el fondo de tu logo */
+    color: #ffffff;
+    border: none;
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 10px rgba(157, 78, 221, 0.3); /* Brillo sutil morado */
+}
+
+.btn-capitulos-scroll:hover {
+    background-color: #b5179e; /* Un tono más encendido/fucsia al pasar el mouse */
+    box-shadow: 0 4px 15px rgba(181, 23, 158, 0.5);
+    transform: translateY(-1px);
+}
+/* ========================================================
+   BARRA DE CONTROL: BUSCADOR E INVERTIR
+   ======================================================== */
+.controles-capitulos {
+    background-color: #1c202e;
+    padding: 12px 16px;
+    border-radius: 6px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.buscador-bloque {
+    flex: 1;
+}
+
+.buscador-bloque input {
+    width: 100%;
+    background-color: #cccccc; /* Gris claro de la imagen */
+    border: none;
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #11141d;
+    font-weight: 500;
+    outline: none;
+}
+
+.buscador-bloque input::placeholder {
+    color: #555555;
+}
+
+/* Botón Invertir */
+.btn-util {
+    background-color: #38425d;
+    color: #ffffff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: bold;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+}
+
+.btn-util:hover {
+    background-color: #4a577a;
+}
+
+/* ========================================================
+   CUADRÍCULA DE CAPÍTULOS (Auto-ajustable con Grid)
+   ======================================================== */
+.grid-capitulos {
+    display: grid;
+    /* Crea columnas automáticas de mínimo 220px. Si entran más, las acomoda al lado */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    padding-bottom: 5px;
+}
+
+/* Tarjeta contenedora de cada cuadradito */
+.capitulo-tarjeta {
+    background-color: #1a1e29;
+    border-radius: 8px;
+    overflow: hidden; /* Corta la imagen para respetar las esquinas redondeadas */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.capitulo-tarjeta:hover {
+    transform: translateY(-4px); /* Efecto levitación */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.thumbnail-wrapper {
+    position: relative;
+    width: 100%;
+    display: block;
+    aspect-ratio: 16 / 9; /* Obliga a mantener las miniaturas en formato horizontal cine */
+}
+
+.thumbnail-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta la imagen limpiamente si las proporciones varían */
+}
+
+/* ETIQUETA FLOTANTE SOBRE LA MINIATURA DEL CAPÍTULO */
+.etiqueta-ep {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #240046; /* Morado ultra oscuro para el fondo de la etiqueta */
+    color: #e0aaff; /* Texto morado pastel/claro para máxima lectura */
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    border: 1.5px solid #c77dff; /* Borde morado brillante que hace que resalte sobre la miniatura */
+}
+
+/* EFECTO MORADO CUANDO PASAS EL MOUSE POR LA TARJETA */
+.capitulo-tarjeta:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(157, 78, 221, 0.25); /* Destello morado en la tarjeta */
+}
+
+/* Elimina las flechas del input number en Chrome, Safari, Edge y Opera */
+.buscador-bloque input::-webkit-outer-spin-button,
+.buscador-bloque input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Elimina las flechas en Firefox */
+.buscador-bloque input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* ========================================================
+   MEDIA QUERIES (REGLAS DE ADAPTACIÓN PARA CELULARES)
+   ======================================================== */
+@media (max-width: 768px) {
+    /* El banner pasa de horizontal a vertical en móviles */
+    .anime-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 16px;
+    }
+
+    .anime-portada-bloque {
+        flex: 0 0 180px;
+        width: 130px; /* Reducimos la portada en móviles */
+    }
+
+    .anime-info-bloque h2 {
+        font-size: 1.6rem;
+        margin-top: 10px;
+    }
+
+    .btn-capitulos-scroll {
+        align-self: center; /* Centramos el botón en celulares */
+    }
+
+    /* Reducimos un poco las celdas en pantallas muy chicas */
+    .grid-capitulos {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 12px;
+    }
+    
+    .etiqueta-ep {
+        font-size: 0.7rem;
+        padding: 3px 8px;
+    }
+}

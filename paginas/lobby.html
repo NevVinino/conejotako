@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conejotako - Lobby</title>
+    <!-- CSS general y el CSS específico del Lobby -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/styles_lobby.css">
+    <link rel="icon" type="image/jpg" href="../img/profile.jpg">
+
+    <!-- Supabase Local -->
+    <script src="../js/supabase.js"></script>
+</head>
+
+<body>
+
+    <div id="espacio-navbar"></div>
+
+    <main class="lobby-container">
+        <!-- SECCIÓN ENCABEZADO (Basado en la parte superior de image_8f80a3.png) -->
+        <section class="anime-header" id="anime-header">
+            <p class="estado-lobby">Cargando información del anime...</p>
+        </section>
+
+        <!-- BARRAS DE HERRAMIENTAS (Buscador e Invertir) -->
+        <section class="controles-capitulos">
+            <div class="buscador-bloque">
+                <input type="number" id="buscador-input" min="1" step="1"
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                    placeholder="Buscar capítulo, sólo número...">
+            </div>
+            <button id="btn-invertir" class="btn-util">↓ Invertir</button>
+        </section>
+
+        <!-- CUADRÍCULA DE CAPÍTULOS (Pequeños cuadraditos de la imagen) -->
+        <section class="grid-capitulos" id="grid-capitulos">
+            <!-- Se llena dinámicamente desde JS -->
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../js/navbar.js"></script>
+    <script src="../js/lobby.js"></script>
+</body>
+
+</html>
