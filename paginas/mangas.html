@@ -6,20 +6,24 @@
     <title>Conejotako - Mangas</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="icon" type="image/jpg" href="../img/profile.jpg">
+    <!-- Supabase Local -->
+    <script src="../js/supabase.js"></script>
 </head>
-<body>
+<body class="mangas-page">
     
     <div id="espacio-navbar"></div>
     
     <h1>Mangas</h1>
 
+    <div class="buscador-contenedor">
+        <input type="text" id="buscador" placeholder="Buscar manga por titulo...">
+    </div>
+
     <div id="contenedor-biblioteca" class="biblioteca">
         <p id="estado-carga" style="color: white; padding: 20px; font-family: sans-serif;">Cargando catálogo de mangas...</p>
     </div>
 
-    <script src="../js/navbar.js"></script>
-    <script src="../js/supabase.js"></script>
-    
+    <script src="../js/navbar.js"></script>    
     <script src="../js/biblioteca_manga.js"></script> 
 </body>
 </html>

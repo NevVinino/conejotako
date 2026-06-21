@@ -4,6 +4,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_inv_aAknxGhwHyv2dB_EYg_6o8gaKAg";
 
 // Aquí mantenemos tu variable 'supabaseClient'
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let elementosManga = [];
 
 async function obtenerCatalogoManga() {
     const contenedor = document.getElementById('contenedor-biblioteca');
@@ -28,15 +29,19 @@ async function obtenerCatalogoManga() {
 
         // 3. Renderizamos las portadas de tus mangas grabados
         catalogo.forEach(manga => {
-            contenedor.innerHTML += `
-                <div class="biblioteca-item">
-                    <a href="lobby.html?id=${manga.id}">
-                        <img src="${manga.imagen_url}" alt="${manga.titulo}">
-                        <span>${manga.titulo}</span>
-                    </a>
-                </div>
+            const tarjeta = document.createElement('div');
+            tarjeta.className = 'biblioteca-item';
+            tarjeta.setAttribute('data-titulo', (manga.titulo || '').toLowerCase());
+            tarjeta.innerHTML = `
+                <a href="lobby.html?id=${manga.id}">
+                    <img src="${manga.imagen_url}" alt="${manga.titulo}">
+                    <span>${manga.titulo}</span>
+                </a>
             `;
+            contenedor.appendChild(tarjeta);
         });
+
+        elementosManga = Array.from(contenedor.getElementsByClassName('biblioteca-item'));
 
     } catch (error) {
         console.error("Error al conectar con Supabase:", error);
@@ -44,4 +49,27 @@ async function obtenerCatalogoManga() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', obtenerCatalogoManga);
+function inicializarBuscadorManga() {
+    const buscador = document.getElementById('buscador');
+    if (!buscador) return;
+
+    buscador.addEventListener('input', () => {
+        const query = buscador.value.toLowerCase().trim();
+
+        elementosManga.forEach(item => {
+            const titulo = (item.getAttribute('data-titulo') || '').toLowerCase();
+            const textoVisible = item.textContent.toLowerCase();
+
+            if (titulo.includes(query) || textoVisible.includes(query)) {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    await obtenerCatalogoManga();
+    inicializarBuscadorManga();
+});

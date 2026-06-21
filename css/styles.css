@@ -1,7 +1,10 @@
 @import url("navbar.css");
+@import url("styles_escenario.css");
 @import url("styles_library.css");
-@import url("styles_yt.css");
+@import url("styles_lobby.css");
 @import url("styles_traducciones.css");
+@import url("styles_yt.css");
+
 * {
   box-sizing: border-box;
 }
@@ -225,6 +228,42 @@ footer {
     filter: drop-shadow(0 8px 15px rgba(114, 137, 218, 0.4)); /* Añade un sutil brillo con el color azul de Discord */
 }
 
+/* Contenedor y Estilos del Buscador */
+body.traducciones-page .buscador-contenedor,
+body.anime-page .buscador-contenedor,
+body.mangas-page .buscador-contenedor {
+  max-width: 500px;
+  margin: 0 auto 2.5rem; /* Centrado con margen inferior */
+  padding: 0 0.5rem;
+}
+
+body.traducciones-page #buscador,
+body.anime-page #buscador,
+body.mangas-page #buscador {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  font-size: 1rem;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  outline: none;
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.traducciones-page #buscador::placeholder,
+body.anime-page #buscador::placeholder,
+body.mangas-page #buscador::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+body.traducciones-page #buscador:focus,
+body.anime-page #buscador:focus,
+body.mangas-page #buscador:focus {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: #5865F2; /* Color de enfoque haciendo juego con el hover */
+  box-shadow: 0 0 12px rgba(88, 101, 242, 0.2);
+}
 
 
 @media (max-width: 900px) {

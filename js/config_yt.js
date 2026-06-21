@@ -1,18 +1,16 @@
-// ==========================================
-// 1. IMPORTACIONES DIRECTAS DESDE INTERNET
-// ==========================================
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
-
-// ==========================================
-// 2. CONFIGURACIÓN INICIAL (¡Llaves Protegidas!)
-// ==========================================
+// CONFIGURACIÓN INICIAL (¡Llaves Protegidas!)
 const SUPABASE_URL = "https://vqroowwikohpsudlinpc.supabase.co"; 
 const SUPABASE_ANON_KEY = "sb_publishable_inv_aAknxGhwHyv2dB_EYg_6o8gaKAg";   
 const YT_API_KEY = "AIzaSyAuw_kVOu4dJ0J8ZHrU-4WHEjfZDLivLgo";              
 
 const YT_CHANNEL_ID = "UCkaHtuBIU0JvmAxN5Qn6Ftw"; 
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabaseLib = window.supabase;
+if (!supabaseLib) {
+    throw new Error("La libreria local de Supabase no se cargo antes de config_yt.js.");
+}
+
+const supabaseClient = supabaseLib.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // URLs de la API de YouTube: va pedir 6 videos recientes (para luego filtrar y quedarnos con 3) y una consulta específica para el directo
 const youtubeUrl = `https://www.googleapis.com/youtube/v3/search?key=${YT_API_KEY}&channelId=${YT_CHANNEL_ID}&part=snippet,id&order=date&maxResults=6&type=video`;
@@ -29,7 +27,7 @@ const HORA_FIN = 23;   // 11:00 PM
 // ==========================================
 async function gestionarVideosRecomendados() {
     try {
-        const { data: cache, error } = await supabase
+        const { data: cache, error } = await supabaseClient
             .from('videos_cache')
             .select('*')
             .order('id', { ascending: true });
@@ -75,7 +73,7 @@ async function gestionarVideosRecomendados() {
                     const tresFinales = soloEditadosYShorts.slice(0, 3);
 
                     if (tresFinales.length > 0) {
-                        await supabase.from('videos_cache').delete().neq('id', 0);
+                        await supabaseClient.from('videos_cache').delete().neq('id', 0);
 
                         // Mapeamos los datos simulando exactamente la estructura de tu primera versión
                         const filasAInsertar = tresFinales.map(item => ({
@@ -84,7 +82,7 @@ async function gestionarVideosRecomendados() {
                             ultima_revision: ahora.toISOString()
                         }));
 
-                        await supabase.from('videos_cache').insert(filasAInsertar);
+                        await supabaseClient.from('videos_cache').insert(filasAInsertar);
                         renderizarVideos(filasAInsertar);
                     } else {
                         renderizarVideos(cache);
@@ -157,7 +155,7 @@ async function controlarPantallaEnVivo() {
 
     try {
         // Leemos el último estado guardado en Supabase
-        const { data: cacheLive } = await supabase
+        const { data: cacheLive } = await supabaseClient
             .from('estado_canal')
             .select('*')
             .eq('id', 1)
@@ -202,7 +200,7 @@ async function controlarPantallaEnVivo() {
             }
 
             // Guardamos la respuesta y el ID del video en Supabase usando un separador '|'
-            await supabase.from('estado_canal').upsert({
+            await supabaseClient.from('estado_canal').upsert({
                 id: 1,
                 en_vivo: estaEnVivo,
                 ultima_revision: `${ahora.toISOString()}|${liveVideoId}`

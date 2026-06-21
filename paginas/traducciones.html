@@ -7,6 +7,8 @@
     <title>Conejotako</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="icon" type="image/jpg" href="../img/profile.jpg">
+    <!-- Supabase Local -->
+    <script src="../js/supabase.js"></script>
 </head>
 
 <body class="traducciones-page">
@@ -17,10 +19,11 @@
     <div class="descripcion" id="id-descripcion">
         <p class="descripcion-texto">
             Estas traducciones están siendo realizadas con IA por <span class="fecha-destacada">Ezzo Cadner</span>
-            (un amigo peruano del fandom) y serán subidas a partir de la fecha de <span class="fecha-destacada">mayo 2026</span>,
-            estas traducciones son de prueba y pueden contener errores, si deseas colaborar 
+            (un amigo peruano del fandom) y serán subidas a partir de la fecha de <span class="fecha-destacada">mayo
+                2026</span>,
+            estas traducciones son de prueba y pueden contener errores, si deseas colaborar
             con las traducciones o quieres aportar con la raw de una reciente novela del mercado,
-            no dudes en contactarme por mis redes sociales.
+            not dudes en contactarme por mis redes sociales.
         </p>
 
         <img src="../img/yuru.gif">
@@ -29,33 +32,17 @@
             <input type="text" id="buscador" placeholder="Buscar traducción por nombre o fecha...">
         </div>
 
+        <!-- MODIFICACIÓN 1: Vaciamos la lista estática -->
         <ul id="lista-traducciones">
-            <li data-nombre="priestella rapsodia" data-fecha="2026-05-15">
-                <a href="https://mega.nz/folder/Lp5yBCSb#m13RSN_L99hDXx7gcn9ZVA" target="_blank">
-                    <span class="titulo-traduccion">Raphsodia (english & spanish)</span>
-                    <span class="fecha-traduccion">15/05/2026</span>
-                </a>
+            <li>
+                <span class="titulo-traduccion">Cargando traducciones desde la base de datos...</span>
             </li>
-            <li data-nombre="emilia re:zero" data-fecha="2026-06-01">
-                <a href="" target="_blank">
-                    <span class="titulo-traduccion">Pronto</span>
-                    <span class="fecha-traduccion">01/06/2026</span>
-                </a>
-            </li>
-            <li data-nombre="echidna re:zero prologo" data-fecha="2026-04-10">
-                <a href="" target="_blank">
-                    <span class="titulo-traduccion">Pronto</span>
-                    <span class="fecha-traduccion">10/04/2026</span>
-                </a>
-            </li>
-
         </ul>
-
 
     </div>
 </body>
 
 <script src="../js/navbar.js"></script>
-<script src="../js/buscar_traducciones.js"></script>
+<script type="module" src="../js/traducciones.js"></script>
 
 </html>
